@@ -1,0 +1,57 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+/* START LANDING PAGE */
+.landing {
+    background-image: url(https://alltimelists.com/wp-content/uploads/2019/09/Background-of-Every-Movie-812x464.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.landing_header {
+    width: 100%;
+    height: 100px;
+    top: 0;
+    background-color: black;
+}
+.landing_logo > img {
+    position: fixed;
+    top: 5px;
+    left: 40px;
+}
+.landing_login {
+    position: fixed;
+    top: 40px;
+    right: 40px;
+}
+.landing_login > span {
+    background-color: red;
+    color: white;
+    font-size: 20px;
+}
+.landing_content {
+    margin: 0;
+    width: 500px;
+    height: 200px;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+/* END LANDING PAGE */
+
+/* START HEADER */
+.header {
+    width: 100%;
+    height: 100px;
+    top: 0;
+    background-color: black;
+}
+.logo > a {
+    position: fixed;
+    top: 5px;
+    left: 40px;
+}
+
+/* END HEADER */
