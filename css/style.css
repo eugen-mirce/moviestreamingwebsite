@@ -49,9 +49,48 @@
     background-color: black;
 }
 .logo > a {
-    position: fixed;
+    position: absolute;
     top: 5px;
     left: 40px;
 }
+.navbar {
+    width: 80%;
+    height: 40px;
+    position: relative;
+    background-color: white;
+    margin: 30px;
+    float: right;
+}
+.navbar > ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+li {
+    display: inline;
+    float: left;
+}
+li > a {
+    display: block;
+    padding: 15px;
+    background-color: black;
+    width: 50px;
 
+}
 /* END HEADER */
+
+/* START FOOTER */
+.footer {
+    width: 100%;
+    height: 200px;
+    background-color: black;
+}
+/* END FOOTER */
+
+/* START CONTENT */
+.content {
+    width: 100%;
+    height: 600px;
+    background-color: white;
+}
+/* END CONTENT */

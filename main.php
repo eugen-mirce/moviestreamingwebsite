@@ -12,8 +12,6 @@
 <div class="content">
 </div>
 <!-- Footer -->
-<div class="footer">
-<?php //include('footer.php'); ?>
-</div>
+<?php include('footer.php'); ?>
 </body>
 </html>
