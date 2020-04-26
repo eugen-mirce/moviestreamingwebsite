@@ -9,7 +9,7 @@
 <!-- Header -->
 <div class="landing_header">
     <div class="landing_logo">
-        <img src="https://www.stickpng.com/assets/images/580b57fcd9996e24bc43c529.png" witdth="250px" height="80px"> 
+        <img src="../web/img/logo.png" witdth="250px" height="80px"> 
     </div>
     <div class="landing_login">
         <span>Sign In</span>
@@ -22,7 +22,7 @@
     <span> Sign Up Now </span>
 </div>
 <!-- Footer -->
-<div class="footer">
+<div class="landing_footer">
 
 </div>
 </body>

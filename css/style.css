@@ -54,7 +54,7 @@
     left: 40px;
 }
 .navbar {
-    width: 80%;
+    width: 60%;
     height: 40px;
     position: relative;
     background-color: white;
@@ -75,8 +75,19 @@ li > a {
     padding: 15px;
     background-color: black;
     width: 50px;
-
 }
+.sign_in {
+    padding: 11px;
+    background-color: red;
+    width: 50px;
+    float: right;
+}
+a:link, a:visited {
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+  }
 /* END HEADER */
 
 /* START FOOTER */
