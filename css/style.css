@@ -57,7 +57,7 @@
     width: 60%;
     height: 40px;
     position: relative;
-    background-color: white;
+    background-color: black;
     margin: 30px;
     float: right;
 }
@@ -66,28 +66,39 @@
     margin: 0;
     padding: 0;
 }
-li {
+li.nav {
     display: inline;
     float: left;
 }
-li > a {
+li.nav > a {
     display: block;
     padding: 15px;
     background-color: black;
-    width: 50px;
 }
 .sign_in {
     padding: 11px;
     background-color: red;
-    width: 50px;
     float: right;
 }
-a:link, a:visited {
+.log_out {
+    padding: 11px;
+    background-color: red;
+    float: right;
+}
+.nav > a:link, .nav > a:visited {
     color: white;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-  }
+}
+.nav > input {
+    position: absolute;
+    top: 10px;
+    display: block;
+    border: none;
+    padding: 5px;
+
+}
 /* END HEADER */
 
 /* START FOOTER */
@@ -105,3 +116,7 @@ a:link, a:visited {
     background-color: white;
 }
 /* END CONTENT */
+
+#firebaseui-auth-container {
+    margin: 30px;
+}
