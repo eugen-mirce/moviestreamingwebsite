@@ -11,7 +11,7 @@
         <?php 
         //Check if user is logged in
         session_start();
-        if(isset($_SESSION['user_id'])) {?>
+        if(isset($_SESSION['_user_id'])) {?>
             <li class="nav"><a href="../web/profile.php">Profile</a></li>
             <span class="nav log_out"><a class= "removed-style" href="../web/logout.php">Log Out</a></span>
         <?php } else { ?>

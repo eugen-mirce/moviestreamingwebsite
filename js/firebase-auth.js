@@ -9,13 +9,10 @@ var uiConfig = {
             if(isNewUser) {
                 // Add User Into Database
                 var displayName = user.displayName;
-                $.post('create_account.php', { uid: user_id, name: displayName, email: user_email});
-
-                // Set Session & Cookies | Do "Login State"
-                $.post('set_session_id.php', { uid: user_id});
+                $.post('create_account.php', { uid: user_id, name: displayName, email: user_email}, {async: false});
             } else {
                 // Set Session & Cookies | Do "Login State"
-                $.post('set_session_id.php', { uid: user_id});
+                $.post('set_session_id.php', { uid: user_id}, {async: false});
             }
             return true;
         },
@@ -31,7 +28,7 @@ var uiConfig = {
             document.getElementById('loader').style.display = 'none';
         }
     },
-    signInSuccessUrl: 'http://localhost/web/login.php',
+    signInSuccessUrl: 'http://localhost/web/home.php',
     signInOptions: [
         firebase.auth.FacebookAuthProvider.PROVIDER_ID,
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,

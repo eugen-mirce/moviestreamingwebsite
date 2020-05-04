@@ -18,7 +18,7 @@
 <?php include('header.php'); ?>
 <!-- Content -->
 <div class="content">
-<?php if(isset($_SESSION['user_id'])) { ?>
+<?php if(isset($_SESSION['_user_id'])) { ?>
     <!-- TODO | Page Where It Shows Successfully Logged in And Redirects In 5 Seconds To Home -->
 <?php } else { ?>
     <!-- Show Only If Not Logged In -->
