@@ -4,7 +4,7 @@
 }
 /* START LANDING PAGE */
 .landing {
-    background-image: url(https://alltimelists.com/wp-content/uploads/2019/09/Background-of-Every-Movie-812x464.jpg);
+    background-image: url(https://cdn.hipwallpaper.com/i/98/21/dUyCkp.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -13,6 +13,7 @@
     height: 100px;
     top: 0;
     background-color: black;
+    opacity: 80%;
 }
 .landing_logo > img {
     position: fixed;
@@ -26,18 +27,30 @@
 }
 .landing_login > span {
     background-color: red;
-    color: white;
+    color: rgb(187, 17, 17);
     font-size: 20px;
 }
 .landing_content {
     margin: 0;
-    width: 500px;
-    height: 200px;
-    background-color: white;
+    background-color: black;
+    opacity: 80%;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    text-align: center;
+
+}
+#buton {
+    margin: 2;
+    width: 90px;
+    height: 25px;
+    background-color: red;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
 }
 /* END LANDING PAGE */
 
@@ -119,4 +132,118 @@ li.nav > a {
 
 #firebaseui-auth-container {
     margin: 30px;
+}
+
+/* Css Sign in button start*/
+
+a#buton1{
+  background-color:white;
+  position: relative;
+  display: inline-block;
+  padding: 15px 30px;
+  color: #f32121;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-decoration: none;
+  font-size: 24px;
+  overflow: hidden;
+  transition: 0.2s;
+  font-size: 30px;
+  font-family: monospace;
+    border-style: solid;
+    border-width: 5px;
+    margin-top: 6px;
+}
+a#buton1:hover{
+  color: #842525;
+  background: #f32121;
+  box-shadow: 0 0 5px #f32121, 0 0 10px #f32121, 0 0 30px #f32121;
+  transition-delay: 1s;
+}
+a#buton1 span{
+  position: absolute;
+  display: block;
+}
+a#buton1 span:nth-child(1)  {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg,transparent,#f32121);
+}
+a#buton1:hover span:nth-child(1) {
+  left: 100%;
+  transition: 1s;
+}
+a#buton1 span:nth-child(3) {
+  bottom: -100%;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg,transparent,#f32121);
+}
+a#buton1:hover span:nth-child(3) {
+  right: 100%;
+  transition: 1s;
+  transition-delay: 0.5s;
+}
+a#buton1 span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg,transparent,#f32121);
+}
+a#buton1:hover span:nth-child(2) {
+  top: 100%;
+  transition: 1s;
+  transition-delay: 0.25s;
+}
+a#buton1 span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg,transparent,#f32121);
+}
+a#buton1:hover span:nth-child(4) {
+  bottom: 100%;
+  transition: 1s;
+  transition-delay: 0.75s;
+}
+/* button end*/
+.text1{
+  font-family: monospace;
+  color: black;
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: 8px;
+  margin-bottom: 20px;
+  position: relative;
+  animation: text 3s 1;
+  background: white;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.text2{
+  font-family: monospace;
+  font-size: 30px;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@keyframes text {
+  0%{
+    color: black;
+    margin-bottom: -40px;
+  }
+  30%{
+    letter-spacing: 25px;
+    margin-bottom: -40px;
+  }
+  85%{
+    letter-spacing: 8px;
+    margin-bottom: -40px;
+  }
 }
