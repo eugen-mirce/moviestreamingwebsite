@@ -10,7 +10,6 @@
 <script src="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth.js"></script>
 <link type="text/css" rel="stylesheet" href="../web/css/firebase-ui-auth.css" />
 <script src="js/firebase-auth.js"></script>
-<!--<script src="js/firebase-auth-state.js"></script>-->
 </head>
 <body>
 <!-- Header -->
