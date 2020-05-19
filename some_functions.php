@@ -58,6 +58,7 @@ function replaceAccents($str) {
       'Ы'=>'y', 'ž'=>'z', 'З'=>'z', 'з'=>'z', 'ź'=>'z', 'ז'=>'z', 'ż'=>'z', 'ſ'=>'z', 'Ж'=>'zh', 'ж'=>'zh'
   );
   $str = strtr($str, $replace);
+  $str = str_replace("’","'",$str);
   $str = str_replace("'","''",$str);
   return $str;
 }

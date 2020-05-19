@@ -14,7 +14,7 @@ if(isset($_POST['date']) && isset($_SESSION['_user_id'])) {
         $date->modify('+1 month');
         $date = $date->format('Y-m-d'); 
     }
-    $sql = "UPDATE user SET status='Subscribed', expirydate='$date'";
+    $sql = "UPDATE user SET status='Subscribed', expirydate='$date' WHERE id='".$_SESSION['_user_id']."'";
     if($conn->query($sql)) {
         echo 'Successfully';
     } else {
