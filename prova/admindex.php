@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Admin</title>
+ <link rel="stylesheet" type="text/css" href="stylesheet.css">
+</head>
+<body>
+
+<ul class="menu">
+ <li class="item"><a href="#">Dashboard</a></li>
+ <li class="item"><a href="#">Movies</a>
+  <ul>
+   <li class="item"><a href="">Movie List</a></li>
+   <li class="item"><a href="">New Movie</a></li>
+  </ul>
+ </li>
+ <li class="item"><a href="#">TV Series</a>
+  <ul>
+   <li class="item"><a href="">TV List</a></li>
+   <li class="item"><a href="">New TV</a></li>
+  </ul>
+ </li>
+ <li class="item"><a href="#">Users</a>
+ <li class="item"><a href="">Settings</a></li>
+ <li class="item"><a href="">Logout</a></li>
+ </li>
+</ul> 
+<div>
+<ul class="dashboard">
+<li><div><img src="joker.jpg"></div></li>
+<li><img src="joker.jpg"></li>
+<li><img src="joker.jpg"></li>
+<li><img src="joker.jpg"></li>
+<ul>
+</div>
+</body>
+</html>
