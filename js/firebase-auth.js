@@ -12,7 +12,7 @@ var uiConfig = {
                 $.post('create_account.php', { uid: user_id, name: displayName, email: user_email}, {async: false});
             } else {
                 // Set Session & Cookies | Do "Login State"
-                $.post('set_session_id.php', { uid: user_id}, {async: false});
+                $.post('check_login.php', { uid: user_id}, {async: false});
             }
             return true;
         },
