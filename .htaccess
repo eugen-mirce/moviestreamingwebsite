@@ -1,0 +1,42 @@
+Options -MultiViews
+
+RewriteEngine On
+
+# Rewrite Single Movie
+RewriteRule ^movie/(.*)/ movie.php?slug=$1
+
+# Rewrite Single TVShow
+RewriteRule ^tv/(.*)/ tv.php?slug=$1
+
+# Rewrite Single Episode
+RewriteRule ^episode/(.*)/ episode.php?slug=$1 [L]
+
+# Default Movie List
+RewriteRule ^movies/page/(.*)/ movies.php?page=$1 [L]
+#No Page Included
+RewriteRule ^movies/ movies.php
+
+# Default Tv List
+RewriteRule ^tvshows/page/(.*)/ tvshows.php?page=$1 [L]
+#No Page Included
+RewriteRule ^tvshows/ tvshows.php
+
+# Genre List [both]
+RewriteRule ^genre/(.*)/page/(.*)/ genre.php?slug=$1&page=$2 [L]
+#No Page Included
+RewriteRule ^genre/(.*)/ genre?slug=$1
+
+# Search
+RewriteRule ^search search.php
+
+# Login
+RewriteRule ^login login.php
+
+# Home
+RewriteRule ^home home.php
+
+# Profile
+RewriteRule ^profile profile.php
+
+# Logout
+RewriteRule ^logout logout.php

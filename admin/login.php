@@ -7,25 +7,23 @@ if(!isset($_SESSION))
 } 
 
 if(isset($_SESSION['_admin_username'])) {
-    //If already logged in
     header('location:index.php');
     exit();
 }
 
 if(isset($_POST['username']) && ($_POST['password'])){
-    //If gets username and password from form below
     $uname = $_POST['username'];
-    $pass = $_POST['password'];
+    $pass = md5($_POST['password']);
     
-    //Will add encryption later
-    //Password from POST will be encrypted and checked if matches the password in database for username
     $sql = "SELECT * FROM admin WHERE username='".$uname."' AND password='".$pass."'";
     
     $result=mysqli_query($conn,$sql);
     $num= mysqli_num_rows($result);
+    $row=$result->fetch_array(MYSQLI_ASSOC);
             
     if($num==1){
         $_SESSION['_admin_username'] = $uname;
+        $_SESSION['_admin_role'] = $row['role'];
         header('location:index.php');
         exit();
     } else {

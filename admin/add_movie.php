@@ -2,8 +2,8 @@
 include('conn.php');
 include('some_functions.php');
 
-if(isset($_REQUEST['tmdb_id'])){
-    $tmdb_id = $_REQUEST['tmdb_id'];
+if(isset($_POST['tmdb_id'])){
+    $tmdb_id = $_POST['tmdb_id'];
 
     $json = file_get_contents('https://api.themoviedb.org/3/movie/'.$tmdb_id.'?api_key=29b41875fd9cc24c70edbf57405c2458&append_to_response=trailers,credits,images');
     $data = json_decode($json);
