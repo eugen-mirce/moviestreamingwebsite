@@ -2,41 +2,67 @@ Options -MultiViews
 
 RewriteEngine On
 
-# Rewrite Single Movie
+######################################### Rewrite Single Movie #########################################
 RewriteRule ^movie/(.*)/ movie.php?slug=$1
 
-# Rewrite Single TVShow
+######################################### Rewrite Single TVShow #########################################
 RewriteRule ^tv/(.*)/ tv.php?slug=$1
 
-# Rewrite Single Episode
+######################################### Rewrite Single Episode #########################################
 RewriteRule ^episode/(.*)/ episode.php?slug=$1 [L]
 
-# Default Movie List
+######################################### Default Movie List #########################################
+RewriteRule ^movies/order/(.*)/page/(.*)/ movies.php?order_by=$1&page=$2 [L]
+#No Order Included
 RewriteRule ^movies/page/(.*)/ movies.php?page=$1 [L]
 #No Page Included
+RewriteRule ^movies/order/(.*)/ movies.php?order_by=$1 [L]
+#No Page And No Order Included 
 RewriteRule ^movies/ movies.php
 
-# Default Tv List
+######################################### Default Tv List #########################################
+RewriteRule ^tvshows/order/(.*)/page/(.*)/ tvshows.php?order_by=$1&page=$2 [L]
+#No Order Included
 RewriteRule ^tvshows/page/(.*)/ tvshows.php?page=$1 [L]
 #No Page Included
+RewriteRule ^tvshows/order/(.*)/ tvshows.php?order_by=$1 [L]
+#No Page And No Order Included 
 RewriteRule ^tvshows/ tvshows.php
 
-# Genre List [both]
+######################################### Episodes #########################################
+RewriteRule ^episodes/order/(.*)/page/(.*)/ episodes.php?order_by=$1&page=$2 [L]
+#No Order Included
+RewriteRule ^episodes/page/(.*)/ episodes.php?page=$1 [L]
+#No Page Included
+RewriteRule ^episodes/order/(.*)/ episodes.php?order_by=$1 [L]
+#No Page And No Order Included 
+RewriteRule ^episodes/ episodes.php
+
+######################################### Genre List [both] #########################################
 RewriteRule ^genre/(.*)/page/(.*)/ genre.php?slug=$1&page=$2 [L]
 #No Page Included
-RewriteRule ^genre/(.*)/ genre?slug=$1
+RewriteRule ^genre/(.*)/ genre.php?slug=$1
 
-# Search
+######################################### Search #########################################
+RewriteRule ^search?(.*)/ search.php?keyword=$1 [L]
 RewriteRule ^search search.php
 
-# Login
+######################################### Login #########################################
 RewriteRule ^login login.php
 
-# Home
+######################################### Home #########################################
 RewriteRule ^home home.php
 
-# Profile
+######################################### Profile #########################################
 RewriteRule ^profile profile.php
 
-# Logout
+######################################### Logout #########################################
 RewriteRule ^logout logout.php
+
+######################################### Payment #########################################
+RewriteRule ^payment payment.php
+
+######################################### Error #########################################
+RewriteRule ^404 404.php
+
+ErrorDocument 404 http://localhost/web/404/

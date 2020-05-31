@@ -1,28 +1,16 @@
-<?php 
+<?php
+include('conn.php');
 if(!isset($_SESSION)) { session_start(); } 
 if(!isset($_SESSION['_user_id'])) { 
     header('Location: http://localhost/web/login/');
     exit();
 }
-include('conn.php');
-$sql = "SELECT * FROM user WHERE id='".$_SESSION['_user_id']."'";
-    $res = $conn->query($sql);
-    if( $res->num_rows == 1) {
-        while($row = $res->fetch_assoc()) {
-            $email = $row['email'];
-            $name = $row['name'];
-            $status = $row['status'];
-            $expiry = $row['expirydate'];
-            $tdy = date("Y-m-d");
-        }
-    }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Make A Payment</title>
+<title>Successful Payment</title>
 <link rel="stylesheet" type="text/css" href="http://localhost/web/css/style.css" />
-<!-- jQuery -->
 <script
   src="https://code.jquery.com/jquery-3.5.1.js"
   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
@@ -64,42 +52,13 @@ $sql = "SELECT * FROM user WHERE id='".$_SESSION['_user_id']."'";
                 <div class="close-btn"><img src="http://localhost/web/img/close.png"></div>
             </div>
     <div class="banner">
-        <div class="paypal">
-            <?php if($expiry == null || $expiry<$tdy) { ?>
-                <h3>Make your monthly subscription now</h3>
-            <?php } else {?>
-                <h3>Extend your subscription now</h3>
-            <?php } ?>
-        <script src="https://www.paypal.com/sdk/js?client-id=AT4TraHlfaWWF_ygUjh_pO_60iprGgj1XMHE_neXgcKSNLRhlUqFAxziy4BqKOerFw1EuiezKdPm17xk"></script>
-            <div id="paypal-button-container"></div>
-            <script>
-                paypal.Buttons({
-                    style: {
-                        layout:  'vertical',
-                        color:   'blue',
-                        shape:   'pill',
-                        label:   'pay'
-                    },
-                    createOrder: function(data, actions) {
-                    return actions.order.create({
-                        purchase_units: [{
-                        amount: {
-                            value: '10.0'
-                        }
-                        }]
-                    });
-                    },
-                    onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
-                        $.post('http://localhost/make_payment.php', {date: '<?php if($expiry == null || (strtotime($expiry) < strtotime('now'))) echo 'null'; else echo $expiry;?>' }, function(data){
-                            window.location.replace('http://localhost/web/successful_payment.php');
-                        });
-                    });
-                    },
-                    onError: function (err) {
-                    }
-                }).render('#paypal-button-container');
-            </script>
+        <div class="supay">
+            <div class="sulogo"><img src="http://localhost/web/img/logo.png" witdth="250px" height="80px"></div>
+            <div>
+                <h1>Successfully Paid Subscription</h1><br>
+                <h1 class="link"><a href="http://localhost/web/payment/">Prepay Another Subscription</a></h1><br>
+                <a href="http://localhost/web/home/">Continue To Homepage</a>
+            </div>
         </div>
     </div>
     <ul class="sci">

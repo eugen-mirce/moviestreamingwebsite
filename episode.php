@@ -1,4 +1,5 @@
 <?php include('conn.php');
+include('some_functions.php');
 if(isset($_GET['slug'])) {
     $slug = $_GET['slug'];
 
@@ -13,7 +14,7 @@ if(isset($_GET['slug'])) {
         $episode = $row['episode'];
         $title = $row['title'];
         $airdate = $row['airdate'];
-        $url = $row['url'];
+        $url = isset($row['url']) ? $row['url'] : 'https://vjs.zencdn.net/v/oceans.mp4';
         $description = $row['description'];
 
         $next = null;
@@ -50,7 +51,7 @@ if(isset($_GET['slug'])) {
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
-        <title><?=$title?></title>
+        <title>Watch <?php echo $tvtitle.': '.$season.'-'.$episode;?></title>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" href="http://localhost/web/css/style.css">
@@ -60,7 +61,7 @@ if(isset($_GET['slug'])) {
     </head>
     <body>
         <header>
-            <a href="#" class="logo"><img src="http://localhost/web/img/logo.png"></a>
+            <a href="http://localhost/web/home/" class="logo"><img src="http://localhost/web/img/logo.png"></a>
         </header>
         <div class="sidebar">
             <div class="toggle-btn">
@@ -72,6 +73,7 @@ if(isset($_GET['slug'])) {
                 <li><a href="http://localhost/web/home/">Home</a></li>
                 <li><a href="http://localhost/web/movies/">Movies</a></li>
                 <li><a href="http://localhost/web/tvshows/">TV Shows</a></li>
+                <li><a href="#" id="genre">Genres</a></li>
                 <li><a href="http://localhost/web/search/">Search</a></li>
                 <?php if(!isset($_SESSION)) { session_start(); } 
                     if(isset($_SESSION['_user_id'])) {?>
@@ -83,6 +85,15 @@ if(isset($_GET['slug'])) {
             </ul>
         </div>
         <div class="background" style="background: url('<?=$background?>');background-position: center;background-size: cover;">
+            <?php $res = $conn->query("SELECT genre.name, genre.slug FROM genre INNER JOIN media ON media.genre LIKE CONCAT('%', genre.id, '%') GROUP BY genre.name ORDER BY genre.name ASC")?>
+            <div class="box-genres">
+                <?php while($row = $res->fetch_array(MYSQLI_ASSOC)) {
+                    $name = $row['name'];
+                    $slug = $row['slug'];?>
+                    <div class="genre-box"><h3><a href="http://localhost/web/genre/<?=$slug?>/"><?=$name?></a></h3></div>
+                <?php } ?>
+                <div class="close-btn"><img src="http://localhost/web/img/close.png"></div>
+            </div>
             <div class="banner">
                 <div class="movbut">
                     <a href="#" class="playBtn"><img src="http://localhost/web/img/play.png">PLAY</a> <br><br>
@@ -90,8 +101,10 @@ if(isset($_GET['slug'])) {
                 </div>
                 <div class="content">
                     <h2><span><?=$title;?></span></h2>
+                    <h3><?=$tvtitle;?></h3>
                     <p><i>Synopsis:</i>
-                    <br><?=$description;?></p>
+                    <br><?=$description;?>
+                    <br><i>Airdate:</i> <?=$airdate;?></p>
                     <ul class="sci">
                         <li><a href="https://facebook.com"><img src="http://localhost/web/img/facebook.png"></a></li>
                         <li><a href="https://twitter.com"><img src="http://localhost/web/img/twitter.png"></a></li>
@@ -109,25 +122,38 @@ if(isset($_GET['slug'])) {
         </div>
         <div class="behind">
             <div class="play">
-                <video
-                    style="object-fit: fill;"
-                    id="player"
-                    class="video-js"
-                    controls
-                    preload="auto"
-                    width="640"
-                    height="264"
-                    data-setup="{}"
-                >
-                    <source src="<?=$url;?>" type="video/mp4" />
-                    <p class="vjs-no-js">
-                    To view this video please enable JavaScript, and consider upgrading to a
-                    web browser that
-                    <a href="https://videojs.com/html5-video-support/" target="_blank"
-                        >supports HTML5 video</a
-                    >
-                    </p>
-                </video>
+            <?php $status = userStatus($conn);
+                    if($status == '0') {?>
+                        <div class="user-message">
+                            <h1>You need to login and have a subscription.</h1>
+                            <p><a href="http://localost/web/login/">Login</a></p>
+                        </div>
+                    <?php } elseif($status == '1') {?>
+                        <div class="user-message">
+                            <h1>You need to have a subscription.</h1>
+                            <p><a href="http://localost/web/payment/">Make a payment</a></p>
+                        </div>
+                    <?php } elseif($status == '2') {?>
+                        <video
+                            style="object-fit: fill;"
+                            id="player"
+                            class="video-js"
+                            controls
+                            preload="auto"
+                            width="640"
+                            height="264"
+                            data-setup="{}"
+                        >
+                            <source src="<?=$url;?>" type="video/mp4" />
+                            <p class="vjs-no-js">
+                            To view this video please enable JavaScript, and consider upgrading to a
+                            web browser that
+                            <a href="https://videojs.com/html5-video-support/" target="_blank"
+                                >supports HTML5 video</a
+                            >
+                            </p>
+                        </video>
+                    <?php } ?>
             </div>     
             <img src="http://localhost/web/img/close.png" class="close">
         </div>
@@ -137,24 +163,53 @@ if(isset($_GET['slug'])) {
                     $('.behind').toggleClass('active');
                     $('.play').show();
                 });
+                $('.downloadBtn').click(function(e) {
+                    e.preventDefault();
+                    <?php if($status == '0') {?>
+                        alert('Login And Make A Subscription');
+                    <?php } elseif($status == '1') {?>
+                        alert('Make A Subscription');
+                    <?php } elseif($status == '2') {?>
+                        window.open('<?=$url;?>', '_blank');
+                    <?php } ?>
+                });
                 $('.close').click(function() {
                     $('.play').hide();
                     $('.behind').removeClass('active');
-                    var videojsPlayer = document.getElementById('player');
-                    videojsPlayer.pause();
+                    var player = videojs('player');
+                    player.pause();
                 });
                 $('.toggle-btn').on('click', function(){
                     $('.sidebar').toggleClass('active');
                 });
+                $('#genre').click(function() {
+                    $('.box-genres').addClass('active');
+                    $('.sidebar').removeClass('active');
+                });
+                $('.close-btn').click(function(){
+                    $('.box-genres').removeClass('active');
+                });
             });
+            var vid = document.getElementById("player");
+            vid.onplay = function() {
+                var interval = setInterval(function(){
+                    if((vid.currentTime/vid.duration) * 100 > 50) {
+                        $.post("http://localhost/web/history.php", {tmdbID: '<?=$tmdbID?>'});
+                        clearInterval(interval);
+                    } else {
+                        //console.log(vid.currentTime);
+                    }
+                }, 1000);
+                
+            };
         </script>
     </body>
 </html>
 <?php    } else {
-        require_once('404.php');
+        header('Location: http://localhost/web/404/');
     }
 } else {
-    header('Location: 404.php');
+    header('Location: http://localhost/web/404/');
 }
 
 ?>

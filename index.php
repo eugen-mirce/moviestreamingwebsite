@@ -1,21 +1,23 @@
+<?php 
+    if(!isset($_SESSION)) { session_start(); } 
+    if(isset($_SESSION['_user_id'])) { 
+    header('Location: http://localhost/web/home/');
+}?>
 <!DOCTYPE html>
 <html>
 <head>
 <title>OurMovies - Watch Movies & TV Shows Online</title>
-<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost/web/css/style.css" />
 </head>
-
 <body class="landing">
-<!-- Header -->
 <div class="landing_header">
     <div class="landing_logo">
-        <img src="../web/img/logo3.png" witdth="250px" height="80px"> 
+        <img src="http://localhost/web/img/logo.png" witdth="250px" height="80px"> 
     </div>
     <div class="landing_login">
-        <span onclick="window.location.assign('http:/\/\localhost/web/login/')">Sign In</span>
+        <span class="buton-login"><a href="http://localhost/web/login/">LOGIN</a></span>
     </div>
 </div>
-<!-- Content -->
 <div class="landing_content">
     <span>
     <h1 class="text1">Watch Movies<br>& TV shows</h1>
@@ -31,6 +33,10 @@
     Sign In
     </a>
 </div>
-</div>
+<ul class="sci">
+        <li><a href="https://facebook.com"><img src="http://localhost/web/img/facebook.png"></a></li>
+        <li><a href="https://twitter.com"><img src="http://localhost/web/img/twitter.png"></a></li>
+        <li><a href="https://instagram.com"><img src="http://localhost/web/img/instagram.png"></a></li>
+</ul>
 </body>
 </html>

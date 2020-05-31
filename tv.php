@@ -17,7 +17,7 @@ if(isset($_GET['slug'])) {
         $genre = $row['genre'];
         $description = $row['description'];
         $trailer = $row['trailer'];
-
+        $year = $row['year'];
         $genre = explode(',',$row['genre']);
 
         $genres = [];
@@ -34,7 +34,7 @@ if(isset($_GET['slug'])) {
             if(isset($_SESSION['_user_id'])) {
                 $id = $_SESSION['_user_id'];
                 $resultt = $conn->query("SELECT * FROM wish_list WHERE userID='$id' AND mediaID='$tmdbID'");
-                if($resultt->rows_num == 1) {$fav=true;} else {$fav=false;}
+                if($resultt->num_rows == 1) {$fav=true;} else {$fav=false;}
             } else {
                 $fav = false;
             }
@@ -45,15 +45,14 @@ if(isset($_GET['slug'])) {
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
-        <title><?=$title?></title>
-
+        <title>Watch <?=$title?> (<?=$year?>) </title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" href="http://localhost/web/css/style.css">
         <script src="https://kit.fontawesome.com/f6cad20e11.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <header>
-            <a href="#" class="logo"><img src="http://localhost/web/img/logo.png"></a>
+            <a href="http://localhost/web/home/" class="logo"><img src="http://localhost/web/img/logo.png"></a>
             
         </header>
         <div class="sidebar">
@@ -66,6 +65,7 @@ if(isset($_GET['slug'])) {
                 <li><a href="http://localhost/web/home/">Home</a></li>
                 <li><a href="http://localhost/web/movies/">Movies</a></li>
                 <li><a href="http://localhost/web/tvshows/">TV Shows</a></li>
+                <li><a href="#" id="genre">Genres</a></li>
                 <li><a href="http://localhost/web/search/">Search</a></li>
                 <?php if(!isset($_SESSION)) { session_start(); } 
                     if(isset($_SESSION['_user_id'])) {?>
@@ -78,6 +78,15 @@ if(isset($_GET['slug'])) {
         </div>
         <div class="background" style="background: url('<?=$background?>');background-position: center;background-size: cover;">
             <div class="banner">
+                <?php $res = $conn->query("SELECT genre.name, genre.slug FROM genre INNER JOIN media ON media.genre LIKE CONCAT('%', genre.id, '%') GROUP BY genre.name ORDER BY genre.name ASC")?>
+                <div class="box-genres">
+                    <?php while($row = $res->fetch_array(MYSQLI_ASSOC)) {
+                        $name = $row['name'];
+                        $slug = $row['slug'];?>
+                        <div class="genre-box"><h3><a href="http://localhost/web/genre/<?=$slug?>/"><?=$name?></a></h3></div>
+                    <?php } ?>
+                    <div class="close-btn"><img src="http://localhost/web/img/close.png"></div>
+                </div>
                 <div class="movbut">
                     <a href="#" class="playBtn"><img src="http://localhost/web/img/play.png">SEASONS</a> <br><br>
                     <?php if($fav) { ?>
@@ -146,7 +155,7 @@ if(isset($_GET['slug'])) {
                                 $title = $rowe['title'];
                                 $airdate = $rowe['airdate'];
                                 $slug = $rowe['slug']; ?>
-                                <a href="http://localhost/web/episode/<?=$slug?>"><h3>Episode <?=$episode;?> - <?=$title;?> - <?=$airdate;?></h3></a>
+                                <a href="http://localhost/web/episode/<?=$slug?>/"><h3>Episode <?=$episode;?> - <?=$title;?> - <?=$airdate;?></h3></a>
                             <?php } ?>
                             </div>
                         <?php } ?> 
@@ -182,27 +191,29 @@ if(isset($_GET['slug'])) {
                     $('.sidebar').toggleClass('active');
                 });
                 $('.starBtn').on('click', function(){
-                    if($(this).find('i').hasClass('fas')) {
+                    var i = $(this).find('i');
+                    console.log(i);
+                    if( i.hasClass('fas') ) {
                         $.post("http://localhost/web/favorite.php", {action: 'remove', tmdbID: '<?php echo $tmdbID;?>'}, function(data) {
                             if(data == 'OK') {
-                                $(this).find('i').removeClass('fas');
-                                $(this).find('i').addClass('far');
+                                i.removeClass('fas');
+                                i.addClass('far');
                             }
                             else if(data == 'Missing') {
                                 alert('You Should Be Logged In To Add To Favorites');
                             }
-                            else {}
+                            else {alert('error');}
                         });
                     } else {
                         $.post("http://localhost/web/favorite.php", {action: 'add', tmdbID: '<?php echo $tmdbID;?>'}, function(data) {
                             if(data == 'OK') {
-                                $(this).find('i').removeClass('far');
-                                $(this).find('i').addClass('fas');
+                                i.removeClass('far');
+                                i.addClass('fas');
                             }
                             else if(data == 'Missing') {
                                 alert('You Should Be Logged In To Add To Favorites');
                             }
-                            else {}
+                            else {alert('error');}
                         });
                     }
                 });
@@ -213,15 +224,22 @@ if(isset($_GET['slug'])) {
                     $('.season').hide();
                     $(this).show();
                 });
+                $('#genre').click(function() {
+                    $('.box-genres').addClass('active');
+                    $('.sidebar').removeClass('active');
+                });
+                $('.close-btn').click(function(){
+                    $('.box-genres').removeClass('active');
+                });
             });
         </script>
     </body>
 </html>
 <?php    } else {
-        require_once('404.php');
+        header('Location: http://localhost/web/404/');
     }
 } else {
-    header('Location: 404.php');
+    header('Location: http://localhost/web/404/');
 }
 
 ?>

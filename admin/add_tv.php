@@ -113,8 +113,8 @@ if(isset($_POST['tmdb_id'])){
                     if($airdate == null || strtotime($airdate) >= strtotime(date("Y-m-d"))) {break;} // Only Released Episodes Only
                     
                     $sql = "INSERT IGNORE INTO 
-                            episode (tmdbID, season, episode, slug, title, description, airdate) 
-                            VALUES ('$tmdb_id','$season','$episode','$slug','$ep_title','$description','$airdate')";
+                            episode (tmdbID, season, episode, slug, title, ,url, description, airdate) 
+                            VALUES ('$tmdb_id','$season','$episode','$slug','$ep_title',null,'$description','$airdate')";
                     if ($conn->query($sql)) {
                         echo "Episode ".$episode."Created Successfully.<br>";
                     } else {

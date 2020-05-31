@@ -1,4 +1,8 @@
 <?php
+//block direct access
+define('IS_AJAX', isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
+if(!IS_AJAX) {die('Restricted access');}
+
 include('conn.php');
 
 if(isset($_REQUEST['uid']) && isset($_REQUEST['name']) && isset($_REQUEST['email'])) {
@@ -9,7 +13,7 @@ if(isset($_REQUEST['uid']) && isset($_REQUEST['name']) && isset($_REQUEST['email
     if ($conn->query($sql_query)) {
         session_start();
         $_SESSION['_user_id'] = $uid;
-        echo "Account Created Successfully.";
+        echo "200";
     } else {
         echo "Error: " . $sql_query . "<br>" . $conn->error;
     }
