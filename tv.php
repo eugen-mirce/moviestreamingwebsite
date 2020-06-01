@@ -20,6 +20,10 @@ if(isset($_GET['slug'])) {
         $year = $row['year'];
         $genre = explode(',',$row['genre']);
 
+        $views = $row['views'];
+        $views += 1;
+        $conn->query("UPDATE media SET views = '$views' WHERE tmdbID = '$tmdbID'");
+
         $genres = [];
         foreach($genre as $g) {
             $sql = "SELECT name FROM genre WHERE id='$g'";
