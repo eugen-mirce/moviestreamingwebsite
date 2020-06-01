@@ -528,7 +528,7 @@ header .toggle img {
 font-size: 20px;
 }
 
-.btn1{
+.ep.btn1{
   padding: 0 10px;
   position: absolute;
   margin: 20px;
@@ -542,15 +542,15 @@ font-size: 20px;
   transition: 1.5s;
   background: #262626
 }
-.btn1:hover{
+.ep.btn1:hover{
   box-shadow: 0 5px 30px 0 #e60000 inset, 0 5px 30px 0 #e60000;
   text-shadow: 0 0 5px #e60000,0 0 5px #e60000;
 }
-.btn2:hover{
+.ep.btn2:hover{
   box-shadow: 0 5px 30px 0 #e60000 inset, 0 5px 30px 0 #e60000;
   text-shadow: 0 0 5px #e60000,0 0 5px #e60000;
 }
-.btn2{
+.ep.btn2{
   padding: 0 10px;
   position: absolute;
   margin: 20px;
@@ -964,10 +964,11 @@ padding: 10px;
 text-decoration: none;
 color: black;
 }
-.btn1{
+.container .btn1{
 padding: 0;
 margin: 10px;
 position: absolute;
+left: 0;
 top: 50%;
 font-size: xx-large;
 border-radius: 100px;
@@ -978,20 +979,20 @@ transition: 1.5s;
 transform: translateY(-50%);
 background: #262626;
 }
-.btn1:hover{
+.container .btn1:hover{
 box-shadow: 0 5px 50px 0 #e60000 inset, 0 5px 50px 0 #e60000;
 text-shadow: 0 0 5px #e60000,0 0 5px #e60000;
 }
-.btn2:hover{
+.container .btn2:hover{
 box-shadow: 0 5px 50px 0 #e60000 inset, 0 5px 50px 0 #e60000;
 text-shadow: 0 0 5px #e60000,0 0 5px #e60000;
 }
-.btn2{
+.container .btn2{
 padding: 0;
 margin: 10px;
 position: absolute;
-top: 50%;
 right: 0;
+top: 50%;
 font-size: xx-large;
 cursor:pointer;
 border-radius: 100px;

@@ -158,7 +158,7 @@ if(isset($_GET['slug'])) {
                     if($status == '0') {?>
                         <div class="user-message">
                             <h1>You need to login and have a subscription.</h1>
-                            <p><a href="http://localost/web/login/">Login</a></p>
+                            <p><a href="http://localhost/web/login/">Login</a></p>
                         </div>
                     <?php } elseif($status == '1') {?>
                         <div class="user-message">

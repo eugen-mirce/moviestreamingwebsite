@@ -113,9 +113,9 @@ if(isset($_GET['slug'])) {
                 </div>
                 <div class="prinext">
                     <?php if($prev) { ?>
-                        <span type="button" value="◄" class="btn1" onclick="window.location.assign('http:\/\/localhost/web/episode/<?=$prev?>/')">◄ Previus Episode</span>
+                        <span type="button" value="◄" class="ep btn1" onclick="window.location.assign('http:\/\/localhost/web/episode/<?=$prev?>/')">◄ Previous Episode</span>
                     <?php } if($next) { ?>
-                        <span type="button" value="►" class="btn2" onclick="window.location.assign('http:\/\/localhost/web/episode/<?=$next?>/')">Next Episode ►</span>
+                        <span type="button" value="►" class="ep btn2" onclick="window.location.assign('http:\/\/localhost/web/episode/<?=$next?>/')">Next Episode ►</span>
                     <?php } ?>
                 </div>
             </div>
@@ -126,7 +126,7 @@ if(isset($_GET['slug'])) {
                     if($status == '0') {?>
                         <div class="user-message">
                             <h1>You need to login and have a subscription.</h1>
-                            <p><a href="http://localost/web/login/">Login</a></p>
+                            <p><a href="http://localhost/web/login/">Login</a></p>
                         </div>
                     <?php } elseif($status == '1') {?>
                         <div class="user-message">
